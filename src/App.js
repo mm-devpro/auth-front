@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
+import { Routes, Route, matchPath, matchRoutes } from "react-router";
+
+import Home from './pages/home/HomePage.component';
+import Login from "./pages/login/LoginPage.component";
+import PageNotFound from "./pages/not-found/PageNotFound.component";
+
+
 import './App.css';
 
-function App() {
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route index element={<Login />} />
+      <Route exact path="/home" element={<Home/>}/>
+      <Route exact path="/login" element={<Login/>}/>
+      <Route exact path="*" element={<PageNotFound/>}/>
+    </Routes>
   );
 }
 
