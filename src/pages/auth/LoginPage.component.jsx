@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      return navigate('/home')
+      navigate('/home')
     }
   }, [])
 
