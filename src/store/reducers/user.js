@@ -1,4 +1,5 @@
 import {createReducer, createSlice} from "@reduxjs/toolkit";
+import api from "../../utils/api";
 
 const initialUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
 
