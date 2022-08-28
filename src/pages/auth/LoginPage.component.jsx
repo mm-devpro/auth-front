@@ -2,20 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Field, Form, Formik, ErrorMessage} from "formik";
 import {Button} from "reactstrap";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 
 import {login} from "../../store/reducers/user";
+import {useCookies} from 'react-cookie';
 
 const Login = () => {
   let navigate = useNavigate()
   const dispatch = useDispatch()
-  const {user} = useSelector(state => state.user)
-
-  useEffect(() => {
-    if (user) {
-      navigate('/home')
-    }
-  }, [])
 
   return (
     <div className="login-container">

@@ -1,10 +1,15 @@
 import {createReducer, createSlice} from "@reduxjs/toolkit";
 import api from "../../utils/api";
+import {useCookies} from 'react-cookie';
 
-const initialUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
+const initialUser = {
+  email: "",
+  password:"",
+  username:""
+}
 
 // SLICE
-const slice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: initialUser,
@@ -12,28 +17,25 @@ const slice = createSlice({
   reducers: {
     loginSuccess: (state, action) => {
       state.user = action.payload;
-      localStorage.setItem("user", JSON.stringify(action.payload))
     },
     logoutSuccess: (state, action) => {
       state.user = null;
-      localStorage.removeItem('user')
     },
   },
 });
-
-export default slice.reducer
-
+//REDUCER
+export default userSlice.reducer
 // ACTIONS
+const {loginSuccess, logoutSuccess} = userSlice.actions
 
-const {loginSuccess, logoutSuccess} = slice.actions
 
-export const login = ({email, password}) => async dispatch => {
+export const login = ({email,password}) => async dispatch => {
   try {
-    //
-    // code for login logic
-    //
-    // const res = await api.post('/api/auth/auth/', {username, password})
-    dispatch(loginSuccess({email}));
+    const res = await api.post('/api/v1/login', {email,password}).then(data => {
+      console.log(data)
+    })
+
+    dispatch(loginSuccess(email));
   } catch(e) {
     return console.error(e.message)
   }
@@ -41,7 +43,7 @@ export const login = ({email, password}) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    // const res = await api.post('/api/auth/logout/')
+    // const res = await api.post('/api/v1/logout')
     return dispatch(logoutSuccess())
   } catch (e) {
     return console.error(e.message)
