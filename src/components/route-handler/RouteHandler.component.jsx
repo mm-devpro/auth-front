@@ -11,7 +11,7 @@ import PageNotFound from "../../pages/not-found/PageNotFound.component";
 
 const RouteHandler = () => {
   const {user} = useSelector(state => state.user)
-  console.log(user)
+
   return (
     <Routes>
       <Route index element={<ProtectedRoute user={user}><Home/></ProtectedRoute>}/>

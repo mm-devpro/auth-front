@@ -1,9 +1,10 @@
 import React from 'react'
-import api from '../../utils/api';
-import axios from 'axios';
+import {useDispatch, useSelector} from "react-redux";
 
 
 const Stream= () => {
+  const {stream} = useSelector(state=> state.stream)
+
   return (
     <div>
       <div>
